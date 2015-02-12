@@ -9,4 +9,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', list),
+    url(r'^article/(?P<articleid>\d+)/$', list),
+    url(r'^article/$', list),
 )
