@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        #editor {overflow:scroll; max-height:300px}
+    </style>
+    <div class="col-md-12">
+        <form action="/blogadmin/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div id="editor"></div>
+            <input type="submit" value="Add new article" />
+        </form>
+    </div>
+{% endblock %}
