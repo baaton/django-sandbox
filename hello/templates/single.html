@@ -3,10 +3,24 @@
     <div class="col-md-12">
         <h1>{{ article.title }}</h1>
         <p>{{ article.body }}</p>
+        <p>
             <a class="btn btn-primary" href="/">Return to posts list</a>
             <a class="btn btn-danger pull-right" href="/delete/{{ article.id }}">Delete This</a>
-
-
+        </p>
+        <br /><br />
+        {% if comments %}
+            <h4>Комментариев: {{ comments|length }}</h4>
+            {% for comment in comments %}
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <p><b>{{ comment.user_name }}</b></p>
+                    <p>{{ comment.body }}</p>
+                  </div>
+                </div>
+            {% endfor %}
+            <br /><br />
+        {% endif %}
+        {% include 'comment/comment_form.html' %}
 
     </div>
 {% endblock %}
