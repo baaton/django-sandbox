@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col-md-12">
+        {% for article in articles %}
+            <a href="/article/{{article.id}}"><h3>{{article.title}}</h3></a>
+            <p>{{article.body|truncatewords:50}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}

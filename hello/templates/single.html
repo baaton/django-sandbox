@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col-md-12">
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.body }}</p>
+            <a class="btn btn-primary" href="/">Return to posts list</a>
+            <a class="btn btn-danger pull-right" href="/delete/{{ article.id }}">Delete This</a>
+
+
+
+    </div>
+{% endblock %}

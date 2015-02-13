@@ -9,17 +9,17 @@ from hello import forms
 def one(request, article_id=0):
     """ View a post """
     article = get_object_or_404(Article, id=article_id)
-    return render(request, 'articles.html', {'article': article, 'articles': []})
+    return render(request, 'single.html', {'article': article, 'articles': []})
 
 
 def list_all(request):
     """ Show all posts """
     return render(request,
-                  'articles.html',
+                  'list.html',
                   {'articles': Article.objects.order_by('-id')})
 
 
-def blogadmin(request):
+def blogadmin(request, article_id=0):
     if request.method == 'POST':
         form = forms.AddPost(request.POST)
         if form.is_valid():
@@ -32,6 +32,13 @@ def blogadmin(request):
         form = forms.AddPost()
 
     return render(request, 'addpost.html', {'form': form})
+
+
+def delete_article(request, article_id=0):
+    articleToRemove = get_object_or_404(Article, id=article_id)
+    articleToRemove.delete()
+    return HttpResponseRedirect('/')
+
 
 def thanks(request):
     return HttpResponse('Thank you! We add your article to database.')
