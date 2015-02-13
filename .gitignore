@@ -4,4 +4,3 @@ staticfiles
 .env
 .python-version
 .gitignore
-gettingstarted/settings.py
