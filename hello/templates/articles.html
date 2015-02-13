@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="col-md-12">
-        {% if urlarticleid %}
-            <h1>{{articles.title}}</h1>
-            <p>{{articles.body}}</p>
+        {% if article %}
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.body }}</p>
             <a class="btn btn-primary" href="/">Return to posts list</a>
         {% else %}
             {% for article in articles %}

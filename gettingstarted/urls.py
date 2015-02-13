@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from hello.views import list, blogadmin, thanks
+from hello.views import list_all, blogadmin, thanks, one
 
 urlpatterns = patterns('',
     # Examples:
@@ -8,9 +8,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', list),
-    url(r'^article/(?P<articleid>\d+)/$', list),
-    url(r'^article/$', list),
+    url(r'^$', list_all),
+    url(r'^article/(?P<article_id>\d+)/$', one),
+    url(r'^article/$', list_all),
     url(r'^blogadmin/$', blogadmin),
     url(r'^thanks/$', thanks),
 )

@@ -1,15 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.http import Http404
 from django.http import HttpResponseRedirect
 from hello.models import Article
 from hello import forms
 
-def list(request, articleid=0):
-    # return HttpResponse(Article.objects.all()[0].title)
-    if articleid==0:
-        return render(request, 'articles.html', {'articles': Article.objects.order_by("-id")})
-    else:
-        return render(request, 'articles.html', {'articles': Article.objects.all()[int(articleid)-1], 'urlarticleid': articleid})
+
+def one(request, article_id=0):
+    """ View a post """
+    article = get_object_or_404(Article, id=article_id)
+    return render(request, 'articles.html', {'article': article, 'articles': []})
+
+
+def list_all(request):
+    """ Show all posts """
+    return render(request,
+                  'articles.html',
+                  {'articles': Article.objects.order_by('-id')})
+
 
 def blogadmin(request):
     if request.method == 'POST':
