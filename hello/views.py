@@ -5,6 +5,7 @@ from django.http import Http404
 from django.http import HttpResponseRedirect
 from hello.models import Article, Comment
 from hello import forms
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 
 
@@ -32,12 +33,20 @@ def one(request, article_id=0):
                                            'comment_form': comment_form})
 
 
-def list_all(request):
+def list_all(request, page=1):
     """ Show all posts """
     all_articles = Article.objects.order_by('-id')
+    paginator = Paginator(all_articles, 5)
+    page = request.GET.get('page')
+    try:
+        paged_articles = paginator.page(page)
+    except PageNotAnInteger:
+        paged_articles = paginator.page(1)
+    except EmptyPage:
+        paged_articles = paginator.page(paginator.num_pages)
     return render(request,
                   'list.html',
-                  {'articles': all_articles})
+                  {'articles': paged_articles})
 
 
 def blogadmin(request, article_id=0):
