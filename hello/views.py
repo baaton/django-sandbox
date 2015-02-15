@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import Http404
@@ -15,6 +16,7 @@ def one(request, article_id=0):
             saved_username = comment_form.cleaned_data['user_name']
             saved_body = comment_form.cleaned_data['body']
             save_comment = Comment(article_id=article_id,
+                                   article_single_id=article_id,
                                   parent_id=0,
                                   date=datetime.datetime.now(),
                                   user_name=saved_username,
@@ -25,18 +27,17 @@ def one(request, article_id=0):
         comment_form = forms.AddComment()
 
     article = get_object_or_404(Article, id=article_id)
-    article_comments = Comment.objects.filter(article_id=article_id).order_by('-id')
 
     return render(request, 'single.html', {'article': article,
-                                           'comment_form': comment_form,
-                                           'comments': article_comments})
+                                           'comment_form': comment_form})
 
 
 def list_all(request):
     """ Show all posts """
+    all_articles = Article.objects.order_by('-id')
     return render(request,
                   'list.html',
-                  {'articles': Article.objects.order_by('-id')})
+                  {'articles': all_articles})
 
 
 def blogadmin(request, article_id=0):

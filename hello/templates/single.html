@@ -8,9 +8,9 @@
             <a class="btn btn-danger pull-right" href="/delete/{{ article.id }}">Delete This</a>
         </p>
         <br /><br />
-        {% if comments %}
-            <h4>Комментариев: {{ comments|length }}</h4>
-            {% for comment in comments %}
+        {% if article.comment_set.all %}
+            <h4>Комментариев: {{ article.comment_set.all|length }}</h4>
+            {% for comment in article.comment_set.all %}
                 <div class="panel panel-default">
                   <div class="panel-body">
                     <p><b>{{ comment.user_name }}</b></p>
