@@ -1,4 +1,3 @@
-from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.http import Http404
@@ -26,12 +25,9 @@ def one(request, article_id=0):
             return HttpResponseRedirect('/article/' + article_id)
     else:
         comment_form = forms.AddComment()
-
     article = get_object_or_404(Article, id=article_id)
-
     return render(request, 'single.html', {'article': article,
                                            'comment_form': comment_form})
-
 
 def list_all(request, page=1):
     """ Show all posts """
@@ -48,7 +44,6 @@ def list_all(request, page=1):
                   'list.html',
                   {'articles': paged_articles})
 
-
 def blogadmin(request, article_id=0):
     if request.method == 'POST':
         form = forms.AddPost(request.POST)
@@ -60,15 +55,12 @@ def blogadmin(request, article_id=0):
             return render(request, 'thank.html')
     else:
         form = forms.AddPost()
-
     return render(request, 'addpost.html', {'form': form})
-
 
 def delete_article(request, article_id=0):
     articleToRemove = get_object_or_404(Article, id=article_id)
     articleToRemove.delete()
     return HttpResponseRedirect('/')
-
 
 def thanks(request):
     return HttpResponse('Thank you! We add your article to database.')
