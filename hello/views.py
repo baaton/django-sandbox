@@ -36,7 +36,7 @@ def one(request, article_id=0):
 def list_all(request, page=1):
     """ Show all posts """
     all_articles = Article.objects.order_by('-id')
-    paginator = Paginator(all_articles, 5)
+    paginator = Paginator(all_articles, 3)
     page = request.GET.get('page')
     try:
         paged_articles = paginator.page(page)
