@@ -3,9 +3,6 @@ from django.contrib import admin
 from hello.views import list_all, blogadmin, thanks, one, delete_article
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'app.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', list_all),

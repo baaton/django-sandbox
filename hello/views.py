@@ -18,6 +18,8 @@ def one(request, article_id='0'):
             comment = Comment()
             comment.body = comment_form.cleaned_data['body']
             comment.username = comment_form.cleaned_data['user_name']
+            comment.parent_comment = request.POST['comment_parent_id']
+            # инпут comment_parent_id генерится javascript и не передается в объекте
             comment.article = article
             comment.save()
             return HttpResponseRedirect('/article/' + article_id)

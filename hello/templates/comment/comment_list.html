@@ -2,10 +2,11 @@
 {% for comment in article.comment_set.all %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <b>{{ comment.username }}</b> - <span class="small">{{ article.created_at|date }}</span>
+            #{{ comment.id }} <b>{{ comment.username }}</b> - <span class="small">{{ article.created_at|date }}</span>
         </div>
       <div class="panel-body">
         <p>{{ comment.body }}</p>
+          <button class="btn btn-default btn-sm js-btn-reply reply-{{ comment.id }}" data-commentparentid="{{ comment.id }}">Reply</button>
       </div>
     </div>
 {% endfor %}

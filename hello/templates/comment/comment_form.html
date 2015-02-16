@@ -4,11 +4,25 @@
         height: 100px !important;
     }
 </style>
-<p>
+<script>
+    $(function(){
+        $('.js-btn-reply').on('click', function(){
+            var parentid = $(this).data('commentparentid');
+            $(this).addClass('hidden');
+            $('.js-comment-form').clone()
+                    .appendTo($(this).parent())
+                    .removeClass('js-comment-form')
+                    .find('form')
+                    .prepend('<input type="hidden" name="comment_parent_id" value="' + parentid + '">')
+                    .find('.js-btn-comment').attr('value', 'Reply');
+        })
+    })
+</script>
+<div class="js-comment-form">
     <form method="post">
         {% csrf_token %}
         {{ comment_form.as_p }}
         <div id="editor"></div>
-        <input class="btn btn-default btn-lg" type="submit" value="Add comment" />
+        <input class="btn btn-default btn-lg js-btn-comment" type="submit" value="Add comment" />
     </form>
-</p>
+</div>
