@@ -8,26 +8,25 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 
 
-def one(request, article_id=0):
+def one(request, article_id='0'):
     """ View a post """
+    article = get_object_or_404(Article, id=article_id)
+
     if request.method == 'POST':
         comment_form = forms.AddComment(request.POST)
         if comment_form.is_valid():
-            saved_username = comment_form.cleaned_data['user_name']
-            saved_body = comment_form.cleaned_data['body']
-            save_comment = Comment(article_id=article_id,
-                                   article_single_id=article_id,
-                                   parent_id=0,
-                                   date=datetime.datetime.now(),
-                                   user_name=saved_username,
-                                   body=saved_body)
-            save_comment.save()
+            comment = Comment()
+            comment.body = comment_form.cleaned_data['body']
+            comment.username = comment_form.cleaned_data['user_name']
+            comment.article = article
+            comment.save()
             return HttpResponseRedirect('/article/' + article_id)
     else:
         comment_form = forms.AddComment()
-    article = get_object_or_404(Article, id=article_id)
+
     return render(request, 'single.html', {'article': article,
                                            'comment_form': comment_form})
+
 
 def list_all(request, page=1):
     """ Show all posts """
@@ -44,6 +43,7 @@ def list_all(request, page=1):
                   'list.html',
                   {'articles': paged_articles})
 
+
 def blogadmin(request, article_id=0):
     if request.method == 'POST':
         form = forms.AddPost(request.POST)
@@ -58,10 +58,12 @@ def blogadmin(request, article_id=0):
         form = forms.AddPost()
     return render(request, 'addpost.html', {'form': form})
 
+
 def delete_article(request, article_id=0):
     articleToRemove = get_object_or_404(Article, id=article_id)
     articleToRemove.delete()
     return HttpResponseRedirect('/')
+
 
 def thanks(request):
     return HttpResponse('Thank you! We add your article to database.')

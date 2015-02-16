@@ -3,15 +3,17 @@
     <div class="col-md-12">
         <h1>{{ article.title }}</h1>
         <p>{{ article.body|safe }}</p>
+        <br /><br />
         <p>
-            <a class="btn btn-primary" href="/">Return to posts list</a>
-            <a class="btn btn-danger pull-right" href="/delete/{{ article.id }}">Delete This</a>
+            <a class="btn btn-primary" href="/">Return to articles</a>
+            <a class="btn btn-danger pull-right" href="/delete/{{ article.id }}">Delete this article</a>
         </p>
+        <br /><br />
+        {% include 'comment/comment_form.html' %}
         <br /><br />
         {% if article.comment_set.all %}
             {% include 'comment/comment_list.html' %}
             <br /><br />
         {% endif %}
-        {% include 'comment/comment_form.html' %}
     </div>
 {% endblock %}

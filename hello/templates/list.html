@@ -6,7 +6,7 @@
                 <a href="/article/{{article.id}}">{{ article.title }}</a>
                 <span class="label label-default">{{ article.comment_set.all|length }}</span>
             </h3>
-            <p>{{article.body|truncatewords:50}}</p>
+            <p>{{ article.body|truncatewords:50|striptags }}</p>
         {% endfor %}
         {% include 'navigation.html' %}
     </div>
