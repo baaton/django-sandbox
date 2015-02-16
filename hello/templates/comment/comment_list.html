@@ -1,8 +1,10 @@
 <h4>Comments: {{ article.comment_set.all|length }}</h4>
 {% for comment in article.comment_set.all %}
     <div class="panel panel-default">
+        <div class="panel-heading">
+            <b>{{ comment.username }}</b> - <span class="small">{{ article.created_at|date }}</span>
+        </div>
       <div class="panel-body">
-        <p><b>{{ comment.username }}</b></p>
         <p>{{ comment.body }}</p>
       </div>
     </div>

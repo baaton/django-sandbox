@@ -13,7 +13,7 @@ class Article(models.Model):
 class Comment(models.Model):
     article = models.ForeignKey(Article)
     body = models.TextField()
-    username = models.CharField(max_length=250)
+    username = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
