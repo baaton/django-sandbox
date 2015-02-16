@@ -2,7 +2,7 @@ from django import forms
 
 class AddPost(forms.Form):
     title = forms.CharField(label='Article title',
-                            max_length=50,
+                            max_length=250,
                             widget=forms.TextInput(attrs={'class': 'form-control'}))
     body = forms.CharField(label='Your Article',
                            widget=forms.Textarea(attrs={'id': 'editor', 'class': 'form-textarea form-control'}))

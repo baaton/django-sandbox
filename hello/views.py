@@ -17,10 +17,10 @@ def one(request, article_id=0):
             saved_body = comment_form.cleaned_data['body']
             save_comment = Comment(article_id=article_id,
                                    article_single_id=article_id,
-                                  parent_id=0,
-                                  date=datetime.datetime.now(),
-                                  user_name=saved_username,
-                                  body=saved_body)
+                                   parent_id=0,
+                                   date=datetime.datetime.now(),
+                                   user_name=saved_username,
+                                   body=saved_body)
             save_comment.save()
             return HttpResponseRedirect('/article/' + article_id)
     else:
@@ -50,7 +50,8 @@ def blogadmin(request, article_id=0):
         if form.is_valid():
             savedTitle = form.cleaned_data['title']
             savedBody = form.cleaned_data['body']
-            savePost = Article(title=savedTitle, body=savedBody)
+            savePost = Article(title=savedTitle,
+                               body=savedBody)
             savePost.save()
             return render(request, 'thank.html')
     else:
