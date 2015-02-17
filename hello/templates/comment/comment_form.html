@@ -1,26 +1,9 @@
 <h4>Please, leave your comment</h4>
-<style>
-    .form-comment {
-        height: 100px !important;
-    }
-</style>
-<script>
-    $(function(){
-        $('.js-btn-reply').on('click', function(){
-            var parentid = $(this).data('commentparentid');
-            $(this).addClass('hidden');
-            $('.js-comment-form').clone()
-                    .appendTo($(this).parent())
-                    .removeClass('js-comment-form')
-                    .find('form')
-                    .prepend('<input type="hidden" name="comment_parent_id" value="' + parentid + '">')
-                    .find('.js-btn-comment').attr('value', 'Reply');
-        })
-    })
-</script>
+<script src="{{ STATIC_URL }}/js/comment_form.js"></script>
 <div class="js-comment-form">
     <form method="post">
         {% csrf_token %}
+        <input class="js-comment_parent_id" type="hidden" name="comment_parent_id" value="0">
         {{ comment_form.as_p }}
         <div id="editor"></div>
         <input class="btn btn-default btn-lg js-btn-comment" type="submit" value="Add comment" />

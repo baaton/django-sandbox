@@ -1,0 +1,23 @@
+body {
+    padding-top: 20px;
+}
+
+label {
+    display: block;
+}
+
+.container {
+    max-width: 760px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.form-comment {
+    height: 100px !important;
+}
+
+.form-textarea {
+    width: 100%;
+}

@@ -1,21 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-    <script src="{{ STATIC_URL }}/js/wy5.js"></script>
-    <script src="{{ STATIC_URL }}/js/wy.js"></script>
-    <link href="{{ STATIC_URL }}/wy.css" rel="stylesheet">
+    <script src="{{ STATIC_URL }}/js/wysiwyg_editor_build.js"></script>
+    <script src="{{ STATIC_URL }}/js/wysiwyg_editor_settings.js"></script>
+    <link href="{{ STATIC_URL }}/css/wysiwyg_editor.css" rel="stylesheet">
     <script>
         $(function(){
             $('#editor').wysihtml5();
         })
     </script>
-    <style>
-    .form-textarea {
-        width: 100%;
-    }
-    </style>
     <div class="col-md-12">
-        <form action="/blogadmin/" method="post">
+        <form action="/addarticle/" method="post">
+            {% load method_override %}
             {% csrf_token %}
+            {% method_override 'PUT' %}
             {{ form.as_p }}
             <input class="btn btn-primary btn-lg" type="submit" value="Add new article" />
         </form>

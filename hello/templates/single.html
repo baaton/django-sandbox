@@ -6,7 +6,7 @@
         <br /><br />
         <p>
             <a class="btn btn-primary" href="/">Return to articles</a>
-            <a class="btn btn-danger pull-right" href="/delete/{{ article.id }}">Delete this article</a>
+            <button class="btn btn-danger pull-right js-btn-delete-article" data-articleid="{{ article.id }}">Delete this article</button>
         </p>
         <br /><br />
         {% include 'comment/comment_form.html' %}
